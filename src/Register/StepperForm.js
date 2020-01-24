@@ -11,3 +11,32 @@ const useStyles = makeStyles(theme => ({}));
 function getSteps() {
   return ["Information", "Account"];
 }
+
+export default function StepperForm() {
+  const classes = useStyles();
+  const [activeStep, setActiveStep] = React.useState(0);
+  const steps = getSteps();
+
+  const handleNext = () => {
+    setActiveStep(prevActiveStep => prevActiveStep + 1);
+  };
+
+  const handleBack = () => {
+    setActiveStep(prevActiveStep => prevActiveStep - 1);
+  };
+
+  const handleReset = () => {
+    setActiveStep(0);
+  };
+
+  function getStepContent(stepIndex) {
+    switch (stepIndex) {
+      case 0:
+        return "Information Component";
+      case 1:
+        return "Account component";
+      default:
+        return "Unknown stepIndex";
+    }
+  }
+}
