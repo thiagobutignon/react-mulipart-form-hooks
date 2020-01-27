@@ -5,7 +5,7 @@ import TextField from "@material-ui/core/TextField";
 
 const useStyles = makeStyles(theme => ({}));
 
-export default function Account() {
+export default function Account({ formProps: { register, errors } }) {
   const classes = useStyles();
 
   return (
@@ -20,12 +20,30 @@ export default function Account() {
         >
           <Grid item md={12} xs={12}>
             <TextField
+              id="email"
+              label="Email"
+              margin="normal"
+              variant="outlined"
+              inputRef={register}
+              error={!!errors.email}
+            />
+            {errors.email && (
+              <p className={classes.errorMessage}>{errors.email.message}</p>
+            )}
+          </Grid>
+          <Grid item md={12} xs={12}>
+            <TextField
               id="password"
               label="Password"
               margin="normal"
               variant="outlined"
               type="password"
+              inputRef={register}
+              error={!!errors.password}
             />
+            {errors.email && (
+              <p className={classes.errorMessage}>{errors.password.message}</p>
+            )}
           </Grid>
         </Grid>
         <Grid
@@ -42,7 +60,14 @@ export default function Account() {
               margin="normal"
               variant="outlined"
               type="password"
+              inputRef={register}
+              error={!!errors.confirmPassword}
             />
+            {errors.confirmPassword && (
+              <p className={classes.errorMessage}>
+                {errors.confirmPassword.message}
+              </p>
+            )}
           </Grid>
         </Grid>
       </div>

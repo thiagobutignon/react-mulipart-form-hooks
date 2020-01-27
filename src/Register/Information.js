@@ -5,7 +5,7 @@ import TextField from "@material-ui/core/TextField";
 
 const useStyles = makeStyles(theme => ({}));
 
-export default function Information() {
+export default function Information({ formProps: { register, errors } }) {
   const classes = useStyles();
 
   return (
@@ -24,7 +24,12 @@ export default function Information() {
               label="First name"
               margi="normal"
               variant="outlined"
+              inputRef={register}
+              error={!!errors.firstName}
             />
+            {errors.firstName && (
+              <p className={classes.errorMessage}>{errors.firstName.message}</p>
+            )}
           </Grid>
           <Grid item md={12} xs={12}>
             <TextField
@@ -32,7 +37,13 @@ export default function Information() {
               label="Last name"
               margi="normal"
               variant="outlined"
+              inputRef={register}
+              error={!!errors.lastName}
             />
+
+            {errors.lastName && (
+              <p className={classes.errorMessage}>{errors.lastName.message}</p>
+            )}
           </Grid>
         </Grid>
         <Grid container direction="row" spacing={1}>
@@ -43,7 +54,14 @@ export default function Information() {
                 label="Nickname"
                 margin="normal"
                 variant="outlined"
+                inputRef={register}
+                error={!!errors.nickname}
               />
+              {errors.nickname && (
+                <p className={classes.errorMessage}>
+                  {errors.nickname.message}
+                </p>
+              )}
             </Grid>
           </Grid>
         </Grid>
